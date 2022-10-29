@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/sample.css">
+  <title>じゃんけん</title>
+</head>
+
+<body>
+  <header>
+    <h1>じゃんけん</h1>
+  </header>
+
+  <main>
+    <ul>
+      <li id="gu_btn">グー</li>
+      <li id="cho_btn">チョキ</li>
+      <li id="par_btn">パー</li>
+    </ul>
+    <div id="com_hand">コンピュータの出した手は？</div>
+    <div id="result">結果は？</div>
+  </main>
+
+  <div class="TEST">TEST</div>
+
+
+  <footer>フッター</footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    //ここに処理を追加
+
+  $('html *').css('overflow', 'hidden');
+  $(window).on('touchmove.noScroll', function (e) {
+    e.preventDefault();
+  });
+
+    const randomNumber = Math.floor(Math.random() * 3)
+    console.log(randomNumber)
+    $("#gu_btn").on("click", function () {
+      const randomNumber = Math.floor(Math.random() * 3);
+    
+      if (randomNumber === 0) {
+        $("#com_hand").text("ぐー")
+        $("#result").text("あいこ")
+      }
+      else if (randomNumber === 1) {
+        $("#com_hand").text("ぱー")
+        $("#result").text("きみのまけ")
+      }
+      else if (randomNumber === 2) {
+        $("#com_hand").text("ちー")
+        $("#result").text("きみのかち")
+      }
+    });
+
+    $("#cho_btn").on("click", function () {
+        const randomNumber = Math.floor(Math.random() * 3);
+        if (randomNumber === 0) {
+          $("#com_hand").text("ぐー")
+          $("#result").text("きみのまけ")
+        }
+        else if (randomNumber === 1) {
+          $("#com_hand").text("ぱー")
+          $("#result").text("きみのかち")
+        }
+        else if (randomNumber === 2) {
+          $("#com_hand").text("ちー")
+          $("#result").text("あいこ")
+        }
+      });
+
+      $("#par_btn").on("click", function () {
+          const randomNumber = Math.floor(Math.random() * 3);
+          if (randomNumber === 0) {
+            $("#com_hand").text("ぐー")
+            $("#result").text("きみのかち")
+          }
+          else if (randomNumber === 1) {
+            $("#com_hand").text("ぱー")
+            $("#result").text("あいこ")
+          }
+          else if (randomNumber === 2) {
+            $("#com_hand").text("ちー")
+            $("#result").text("きみのまけ")
+          }
+        });
+
+
+          var point1 = MK(1, 2); //関数MKの呼び出し。引数は2つ
+          var point2 = MK(6, 7); //関数MKの呼び出し。引数は2つ
+          var point3 = point1 + point2; //関数point3には「16」が格納される
+
+          console.log(point1)
+          console.log(point2)
+          console.log(point3)
+
+  function MK(sample1, sample2) {
+    return sample1 + sample2;
+  }
+
+  </script>
+
+</body>
+
+</html>

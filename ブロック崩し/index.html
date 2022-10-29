@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Gamedev Canvas Workshop</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    canvas {
+      background: #eee;
+      /* canvasの背景色 */
+      display: block;
+      /* display:  block;ブロック要素にする */
+      margin: 0 auto;
+      /* 横幅自動調節 */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 見た目はともかく動くものを作る -->
+  <canvas id="myCanvas" width="480" height="320"></canvas>
+  <!--  <canvas (横幅)width="300" （高さ）height="300">-->
+  <!-- IDとCLASSの違い -->
+  <!-- IDは１Pに一つ、CLASSは複数 -->
+  <!-- IDとCLASSが被ったときはIDが優先 -->
+  <script>
+    // JavaScript のコードはここ
+    const canvas = document.getElementById("myCanvas");
+    // 定数 定数の名前 ＝定数の値
+    // document.getElementById(ここの部分参照する)
+    const ctx = canvas.getContext("2d");
+
+    // function drawBallに関する変数
+    let x = canvas.width / 2;
+    //X＝(canvasの、幅を/割る2した;)位置
+    let y = canvas.height - 30;
+
+    let dx = 1;
+    let dy = -2;
+
+    // 円の半径
+    const ballRadius = 10;
+
+    // パドルに関する変数
+    const paddleHeight = 10;
+    // パドルの高さ
+    const paddleWidth = 75;
+    // パドルの幅
+    let paddleX = (canvas.width - paddleWidth) / 2;
+    // （キャンバスの幅-パドルの幅）÷２
+
+    let rightPressed = false;
+    let leftPressed = false;
+
+    // ブロックに関する変数
+    const brickRowCount = 3;
+      const brickColumnCount = 5;
+      const brickWidth = 75;
+      const brickHeight = 20;
+      const brickPadding = 10;
+      const brickOffsetTop = 30;
+      const brickOffsetLeft = 30;
+
+
+    // addEventListener(type, listener, options);
+    // (type=イベントの種類, listener＝受け取るオブジェクト, options＝？？？？)
+    document.addEventListener("keydown", keyDownHandler, false);
+    document.addEventListener("keyup", keyUpHandler, false);
+
+    function keyDownHandler(e) {
+      if (e.key == "Right" || e.key == "ArrowRight") {
+        rightPressed = true;
+      }
+      else if (e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed = true;
+      }
+    }
+
+    function keyUpHandler(e) {
+      if (e.key == "Right" || e.key == "ArrowRight") {
+        rightPressed = false;
+      }
+      else if (e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed = false;
+      }
+    }
+
+
+    // 位置は左上が（x＝０、y＝０）
+
+    // パドルの要素
+    function drawPaddle() {
+      ctx.beginPath();
+      ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+      ctx.fillStyle = "#0095DD";
+      ctx.fill();
+      ctx.closePath();
+    }
+    // ボールの要素
+    function drawBall() {
+      ctx.beginPath();
+      ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+      ctx.fillStyle = "#0095DD";
+      ctx.fill();
+      ctx.closePath();
+    }
+    // 描写に関する要素
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // clearRect=キャンバスの内容を消去する
+
+      if (y + dy < ballRadius) {
+        dy = -dy;} 
+        else if (y + dy > canvas.height - ballRadius) {
+        if (x > paddleX && x < paddleX + paddleWidth) {
+          dy = -dy;} else {
+          alert("GAME OVER");
+          document.location.reload();
+          clearInterval(interval);
+      
+      }
+
+      }
+
+      if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) { dx = -dx; }
+      // if (x + dx > x + dx > canvas.width) {dx = -dx;}
+      x += dx;
+      // ↑変数の更新＊
+      // 丁寧に書くとlet x= dx(1) + x
+      y += dy;
+
+      if (rightPressed) {
+        paddleX = Math.min(paddleX + 7, canvas.width - paddleWidth);
+        // ( この中の数値の中で最小値を返す)
+      } else if (leftPressed) {
+        paddleX = Math.max(paddleX - 7, 0);
+        // ( この中の数値の中で最大値を返す)
+      }
+
+
+
+
+      drawBall()
+      drawPaddle()
+
+
+    }
+
+
+    const interval = setInterval(draw, 10);
+
+    // setInterval（draw,を 10 ミリ秒ごと）＝繰り返し実行,
+
+    // ------------------------------------
+    // ------------------------------------
+    // ------------------------------------
+    function Test() {
+      ctx.beginPath();
+      ctx.rect(20, 40, h, p);
+      // rect=すべての角が直角の、四辺形（左端２０px,上端４０px,の位置に。幅５０px,高さ５０px,の大きさ）
+      ctx.fillStyle = "#FF0000";
+      // fillStyle=図形の内側を塗りつぶすために使用する色、グラデーション、またはパターンを指定します。
+      ctx.fill();
+      ctx.closePath();
+    }
+
+    ctx.beginPath();
+    ctx.arc(240, 160, 20, 0, Math.PI * 2, false);
+    // void ctx.arc(x, y, radius, startAngle, endAngle [, counterclockwise]);
+    // arc() メソッドは (x, y) を中心とし、 radius を半径とした円弧を作成します。角度は startAngle から endAngle まで、 counterclockwise で指定された向き（既定では時計回り）に描かれます。
+    // Math.PI＝πなのです。
+
+
+    ctx.fillStyle = "green";
+    ctx.fill();
+    // fill()=塗りつぶす。
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.rect(160, 10, 100, 40);
+    ctx.strokeStyle = "rgba(0, 0, 255, 0.5)";
+    // RGBAカラーモデルは、RGBカラーモデルのred・green・blueに、alphaが加わったものです。 alphaは色の透明度を表します。
+    ctx.stroke();
+    ctx.closePath();
+
+
+  </script>
+
+  <!-- 図解を書く際にはbeginPathとclosePathで挟むようにします。 -->
+</body>
+</div>
+
+
+</html>

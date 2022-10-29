@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/sample.css">
+  <title>おみくじ</title>
+</head>
+
+<body>
+  <header>
+    <h1>おみくじ</h1>
+  </header>
+
+  <main>
+    <ul>
+      <li id="pull">おみくじを引く</li>
+    </ul>
+    <p id="echo">結果は？</p>
+  </main>
+
+  <footer>フッター</footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- ↑読み込みたいライブラリーを自分のSCRIPTより上に書く -->
+  <script>
+    // ここに処理を追加
+    const min = 0;
+    const max = 4;
+    const randomnumber = Math.floor(Math.random() * (max - min));
+    console.log(randomnumber)
+
+    if (randomnumber === 0) {
+      // alert("大吉");
+      $("#echo").text("1当たり")
+    } else if (randomnumber === 1) {
+      $("#echo").text("2当たり")
+    } else if (randomnumber === 2) {
+      $("#echo").text("3当たり")
+    } else if (randomnumber === 3) {
+      $("#echo").text("4当たり")
+    } 
+// if(＜変数＞==＝〜〜、であるなら) {＄（”＃〜〜”）＝〜〜を、.text("~~~")=~~~と書き換える。 }
+
+  </script>
+
+</body>
+
+</html>
