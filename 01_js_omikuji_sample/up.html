@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test</title>
+  <link rel="stylesheet" href="css/up.css">
+</head>
+
+<body>
+
+  <form action="test.html" method="post" enctype="multipart/form-data">
+    <input type="file" name="test" onchange="previewFile(this);">
+    <input type="submit" value="送信する">
+  </form>
+  <p>プレビュー</p>
+  <img id="preview">
+
+  <script>
+    function previewFile(hoge) {
+      var fileData = new FileReader();
+      fileData.onload = (function () {
+        //id属性が付与されているimgタグのsrc属性に、fileReaderで取得した値の結果を入力することで
+        //プレビュー表示している
+        document.getElementById('preview').src = fileData.result;
+      });
+      fileData.readAsDataURL(hoge.files[0]);
+    }
+  </script>
+</body>
+<!--  参考URL＊https://web-camp.io/magazine/archives/94835 -->
+<!-- http://msugai.fc2web.com/java/instance.html#:~:text=%E3%82%AF%E3%83%A9%E3%82%B9%E3%81%8B%E3%82%89%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%92%E4%BD%9C%E3%82%8B,%E9%A0%98%E5%9F%9F%E3%81%8C%E7%A2%BA%E4%BF%9D%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99%E3%80%82 -->
+<!-- inputタグは指定したタイプによって仕様が変わる -->
+<!-- action：ファイルの送信先のURLを入力 -->
+<!-- method：送信方法をpostかgetで指定する。ファイルアップロードの場合はpostを指定。 -->
+<!-- enctype：送信するデータの形式を指定する -->
+<!-- inputタグにname属性を指定してファイルに関数する値を入力することで、送信先でファイル内容をname属性の情報から把握できて便利 -->
+<!-- <input type=”submit”>を使って送信ボタン -->
+<!-- valueタグの値に入れた文字が送信ボタンに表示 -->
+<!-- 1回で複数のファイルを指定してアップロードするには、inputタグにmultiple属性 -->
+<!-- アップロードするファイルの拡張子を指定するにはaccept属性 -->
+<!-- <input type=”file”>に指定しているonchangeは、ファイルが指定されたときにpreviewFile(this)というイベントを実行するHTML属性 -->
+<!-- fileData.onloadはファイル情報を正常に読み込めたときに実行する処理 -->
+<!-- 読み込んだファイル情報を「fileData.result」で取得し「document.getElementById(‘preview’).src」でプレビュー表示するimgタグのsrc属性へ指定 -->
+<!-- FileAPIとは、自分のパソコン上にあるファイルデータを操作できるAPI -->
+<!-- File インターフェイスは、ファイルについての情報を提供したり、ウェブページ内の JavaScript からその内容にアクセスできるようする。 -->
+<!-- APIとはプログラム同士をつなぐ「インターフェース」 -->
+<!-- APIとは「アプリケーション・プログラミング・インターフェース（Application Programming Interface）」の略称 -->
+<!-- FileAPIのFileReaderクラスをインスタンス化 -->
+<!-- クラスからオブジェクトを作ることをインスタンス化 -->
+<!-- クラス名 変数名 = new クラス名(引数); -->
+<!-- // オブジェクトを参照する変数宣言 -->
+<!-- クラス名 変数名; -->
+<!-- //インスタンス化 -->
+<!-- 変数名 = new クラス名(); -->
+</html>

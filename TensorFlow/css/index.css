@@ -1,0 +1,14 @@
+<meta charset="utf-8">
+.preview{
+  height: 400px;
+  width: 400px;
+  color: aqua;
+}
+
+.body{
+  background-color: brown;
+  color: red;
+}
+.h1{
+  color: blue;
+}
