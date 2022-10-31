@@ -1,0 +1,29 @@
+html {
+  margin-block-end: 0px;
+  margin-block-start: 0px;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.CPU,
+.YOU {
+  height: 160px;
+  width: 80%;
+  background-color: blue;
+}
+
+.BF {
+  width: 60%;
+  height: 80px;
+  background-color: red;
+}
+
+.CARDIMG{
+  display: flex;
+  justify-content:space-evenly;
+}

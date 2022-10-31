@@ -1,0 +1,16 @@
+let bandit1, images;let bullet1, bulletImage;function preload() { const live = loadImage('images/live.png'); const dead
+= loadImage('images/dead.png'); images = [live, dead]; bulletImage = loadImage('images/bullet.png');}function setup() {
+createCanvas(400, 300); ellipseMode(RADIUS); // 盗賊クラスのインスタンスを作成 bandit1 = new Bandit(10, 150, images); // 弾クラスのインスタンスを作成
+bullet1 = new Bullet(300, 200, bulletImage);}function draw() { background(220); bandit1.display(); bullet1.update();
+bullet1.display(); // 当たり判定 collisionDetect(bandit1, bullet1)}// 当たり判定function collisionDetect(bandit, bullet) { //
+弾は右から左に水平方向にしか移動しないので、この条件を調べるだけで済む if (bandit.right > bullet.left) { // print('当たり'); bandit.die(); bullet.hit();
+}}function mousePressed() { bullet1.shoot(); } // 盗賊クラスclass Bandit { constructor(x, y, imgs) { this.x = x; this.y = y;
+this.images = imgs; this.image = this.images[0]; this.top = this.y; this.bottom = this.y + this.image.height; this.left
+= this.x; // 当たったように見える位置で当たりと判定させるためにright値を調整 this.right = this.x + this.image.width / 2 + 10; } display() {
+image(this.image, this.x, this.y); } // 当たったら死ぬ die() { this.image = this.images[1]; }}// 弾クラスclass Bullet {
+constructor(x, y, img) { this.x = x; this.y = y; this.image = img; this.top = this.y; // 高さはイメージの高さ this.bottom = this.y
++ this.image.height; this.left = this.x; // 幅はイメージの幅 this.right = this.x + this.image.width; // 左に移動するスピード this.speedX =
+-2; // この弾が撃たれたかどうか this.isShoot = false; } display() { image(this.image, this.x, this.y); } update() { if
+(this.isShoot) { this.x += this.speedX; this.top = this.y; this.bottom = this.y + this.image.height; this.left = this.x;
+this.right = this.x + this.image.width; } } shoot() { if (!this.isShoot) { this.isShoot = true; } } // 当たったら画面外に移動させる
+hit() { this.x = 10000; }}
