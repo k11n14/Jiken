@@ -1,0 +1,40 @@
+<html>
+<script>
+
+  const R = Math.floor(Math.random() * 3)
+  console.log(R)
+
+  // function A() {
+  //   alert("Pushed!")
+  // }
+
+  // function A() {if(R===0){
+  //   alert("Pushed!")}}
+
+  function A() {
+    const R = Math.floor(Math.random() * 3)
+    console.log(R)
+    if (R === 0) {
+      alert("A")
+    }else if(R === 1){
+      alert("B")
+    }else if(R === 2){
+      alert("C")
+    }
+  }
+
+
+
+  // function A() {
+  // location.href = 'https://www.google.com/';
+  // }
+
+
+</script>
+
+<body>
+  <a href="#" onclick="A()">ボタン</a>
+  <a href="https://www.google.com/">ここをクリックすると別のサイトにジャンプします</a>
+</body>
+
+</html>

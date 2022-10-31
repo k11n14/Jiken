@@ -1,257 +1,58 @@
-<!DOCTYPE html>
-<html lang="ja">
+<!-- 見えない部分 -->
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script></script>
-  <style type="text/css">
-  
-    table.Q td {
-      width: 20px;
-      height: 20px;
-      font-size: 18pt;
-      text-align: center;
+  <script>
+
+    let Q = ["apple", "banana", "melon", "mango", "starwberry", "blueberry", "orange"];//問題文
+    let Q_No = Math.floor(Math.random() * Q.length);//問題をランダムで出題する
+
+    let Q_i = 0;//回答初期値・現在単語どこまで合っているか判定している文字番号
+    let Q_l = Q[Q_No].length;//計算用の文字の長さ
+
+
+    window.addEventListener("keydown", push_Keydown);
+
+    function push_Keydown(event) {
+
+      let keyCode = event.key;
+      if (Q_l == Q_l - Q_i) {
+        document.getElementById("start").innerHTML = Q[Q_No].substring(Q_i, Q_l); //問題を書き出す
+      }
+
+
+      if (Q[Q_No].charAt(Q_i) == keyCode) { //押したキーが合っていたら
+
+        Q_i++; //判定する文章に１足す
+        document.getElementById("start").innerHTML = Q[Q_No].substring(Q_i, Q_l); //問題を書き出す
+
+        if (Q_l - Q_i === 0) { //全部正解したら
+
+
+          Q_No = Math.floor(Math.random() * Q.length);//問題をランダムで出題する
+          Q_i = 0;//回答初期値・現在どこまで合っているか判定している文字番号
+          Q_l = Q[Q_No].length;//計算用の文字の長さ
+
+
+          document.getElementById("start").innerHTML = Q[Q_No].substring(Q_i, Q_l); //新たな問題を書き出す
+
+        }
+      }
     }
-  
-  </style>
+
+  </script>
+
 </head>
-<body onload="gameSet()" bgcolor="#ffffff" text="#000000" link="#0000ff" alink="#ff0000" vlink="#800080">
-  <h1>タイピングゲームのサンプル　その２</h1>
-  <div id="waku">
-    <table class="Q">
-      <tbody>
-        <tr>
-          <td id="word0">Ｖ</td>
-          <td id="word1">Ｃ</td>
-          <td id="word2">Ｖ</td>
-          <td id="word3">Ｉ</td>
-          <td id="word4">Ｎ</td>
-          <td id="word5">Ｔ</td>
-          <td id="word6">Ｏ</td>
-          <td id="word7">Ｙ</td>
-          <td id="word8">Ｐ</td>
-          <td id="word9">Ｈ</td>
-          <td id="word10">Ａ</td>
-          <td id="word11">Ｓ</td>
-          <td id="word12">Ｏ</td>
-          <td id="word13">Ｊ</td>
-          <td id="word14">Ｄ</td>
-          <td id="word15">Ｓ</td>
-          <td id="word16">Ｏ</td>
-          <td id="word17">Ｐ</td>
-          <td id="word18">Ｇ</td>
-          <td id="word19">Ｒ</td>
-        </tr>
-        <tr>
-          <td id="word20">Ｘ</td>
-          <td id="word21">Ｔ</td>
-          <td id="word22">Ｓ</td>
-          <td id="word23">Ｊ</td>
-          <td id="word24">Ｒ</td>
-          <td id="word25">Ｄ</td>
-          <td id="word26">Ｘ</td>
-          <td id="word27">Ｇ</td>
-          <td id="word28">Ｋ</td>
-          <td id="word29">Ｆ</td>
-          <td id="word30">Ｒ</td>
-          <td id="word31">Ｘ</td>
-          <td id="word32">Ｏ</td>
-          <td id="word33">Ｚ</td>
-          <td id="word34">Ｃ</td>
-          <td id="word35">Ｇ</td>
-          <td id="word36">Ｚ</td>
-          <td id="word37">Ｏ</td>
-          <td id="word38">Ｏ</td>
-          <td id="word39">Ｎ</td>
-        </tr>
-        <tr>
-          <td id="word40">Ｃ</td>
-          <td id="word41">Ｅ</td>
-          <td id="word42">Ｌ</td>
-          <td id="word43">Ｖ</td>
-          <td id="word44">Ａ</td>
-          <td id="word45">Ｚ</td>
-          <td id="word46">Ｖ</td>
-          <td id="word47">Ｙ</td>
-          <td id="word48">Ｄ</td>
-          <td id="word49">Ｘ</td>
-          <td id="word50">Ｈ</td>
-          <td id="word51">Ｉ</td>
-          <td id="word52">Ｆ</td>
-          <td id="word53">Ｇ</td>
-          <td id="word54">Ｕ</td>
-          <td id="word55">Ｋ</td>
-          <td id="word56">Ｎ</td>
-          <td id="word57">Ｃ</td>
-          <td id="word58">Ｑ</td>
-          <td id="word59">Ｖ</td>
-        </tr>
-        <tr>
-          <td id="word60">Ｌ</td>
-          <td id="word61">Ｕ</td>
-          <td id="word62">Ｘ</td>
-          <td id="word63">Ｋ</td>
-          <td id="word64">Ｔ</td>
-          <td id="word65">Ｈ</td>
-          <td id="word66">Ｄ</td>
-          <td id="word67">Ｅ</td>
-          <td id="word68">Ａ</td>
-          <td id="word69">Ｐ</td>
-          <td id="word70">Ｊ</td>
-          <td id="word71">Ｑ</td>
-          <td id="word72">Ｒ</td>
-          <td id="word73">Ｑ</td>
-          <td id="word74">Ｊ</td>
-          <td id="word75">Ａ</td>
-          <td id="word76">Ｌ</td>
-          <td id="word77">Ｂ</td>
-          <td id="word78">Ｊ</td>
-          <td id="word79">Ｔ</td>
-        </tr>
-        <tr>
-          <td id="word80">Ｌ</td>
-          <td id="word81">Ｏ</td>
-          <td id="word82">Ｖ</td>
-          <td id="word83">Ｏ</td>
-          <td id="word84">Ｚ</td>
-          <td id="word85">Ｃ</td>
-          <td id="word86">Ｅ</td>
-          <td id="word87">Ｍ</td>
-          <td id="word88">Ｄ</td>
-          <td id="word89">Ｕ</td>
-          <td id="word90">Ｓ</td>
-          <td id="word91">Ｑ</td>
-          <td id="word92">Ｄ</td>
-          <td id="word93">Ｗ</td>
-          <td id="word94">Ｘ</td>
-          <td id="word95">Ａ</td>
-          <td id="word96">Ｄ</td>
-          <td id="word97">Ｄ</td>
-          <td id="word98">Ｄ</td>
-          <td id="word99">Ｒ</td>
-        </tr>
-        <tr>
-          <td id="word100">Ｓ</td>
-          <td id="word101">Ｋ</td>
-          <td id="word102">Ｉ</td>
-          <td id="word103">Ｏ</td>
-          <td id="word104">Ｔ</td>
-          <td id="word105">Ｘ</td>
-          <td id="word106">Ｕ</td>
-          <td id="word107">Ｌ</td>
-          <td id="word108">Ｚ</td>
-          <td id="word109">Ｏ</td>
-          <td id="word110">Ｚ</td>
-          <td id="word111">Ｎ</td>
-          <td id="word112">Ｘ</td>
-          <td id="word113">Ｇ</td>
-          <td id="word114">Ｅ</td>
-          <td id="word115">Ｚ</td>
-          <td id="word116">Ｉ</td>
-          <td id="word117">Ｘ</td>
-          <td id="word118">Ｇ</td>
-          <td id="word119">Ｖ</td>
-        </tr>
-        <tr>
-          <td id="word120">Ｖ</td>
-          <td id="word121">Ｙ</td>
-          <td id="word122">Ａ</td>
-          <td id="word123">Ｗ</td>
-          <td id="word124">Ｘ</td>
-          <td id="word125">Ｃ</td>
-          <td id="word126">Ｘ</td>
-          <td id="word127">Ｚ</td>
-          <td id="word128">Ｘ</td>
-          <td id="word129">Ｘ</td>
-          <td id="word130">Ｚ</td>
-          <td id="word131">Ｆ</td>
-          <td id="word132">Ｋ</td>
-          <td id="word133">Ｂ</td>
-          <td id="word134">Ｌ</td>
-          <td id="word135">Ｎ</td>
-          <td id="word136">Ｏ</td>
-          <td id="word137">Ｇ</td>
-          <td id="word138">Ｗ</td>
-          <td id="word139">Ｏ</td>
-        </tr>
-        <tr>
-          <td id="word140">Ｃ</td>
-          <td id="word141">Ｐ</td>
-          <td id="word142">Ｕ</td>
-          <td id="word143">Ｓ</td>
-          <td id="word144">Ｎ</td>
-          <td id="word145">Ｏ</td>
-          <td id="word146">Ｘ</td>
-          <td id="word147">Ｏ</td>
-          <td id="word148">Ｚ</td>
-          <td id="word149">Ｅ</td>
-          <td id="word150">Ｐ</td>
-          <td id="word151">Ｃ</td>
-          <td id="word152">Ｋ</td>
-          <td id="word153">Ｄ</td>
-          <td id="word154">Ｇ</td>
-          <td id="word155">Ｖ</td>
-          <td id="word156">Ｓ</td>
-          <td id="word157">Ｕ</td>
-          <td id="word158">Ｎ</td>
-          <td id="word159">Ｖ</td>
-        </tr>
-        <tr>
-          <td id="word160">Ｍ</td>
-          <td id="word161">Ｈ</td>
-          <td id="word162">Ｃ</td>
-          <td id="word163">Ｇ</td>
-          <td id="word164">Ｔ</td>
-          <td id="word165">Ｗ</td>
-          <td id="word166">Ｑ</td>
-          <td id="word167">Ｔ</td>
-          <td id="word168">Ｑ</td>
-          <td id="word169">Ｈ</td>
-          <td id="word170">Ｗ</td>
-          <td id="word171">Ｅ</td>
-          <td id="word172">Ｓ</td>
-          <td id="word173">Ｖ</td>
-          <td id="word174">Ｆ</td>
-          <td id="word175">Ｙ</td>
-          <td id="word176">Ｙ</td>
-          <td id="word177">Ｐ</td>
-          <td id="word178">Ｊ</td>
-          <td id="word179">Ｖ</td>
-        </tr>
-        <tr>
-          <td id="word180">Ｑ</td>
-          <td id="word181">Ｚ</td>
-          <td id="word182">Ｘ</td>
-          <td id="word183">Ｋ</td>
-          <td id="word184">Ｋ</td>
-          <td id="word185">Ｍ</td>
-          <td id="word186">Ｘ</td>
-          <td id="word187">Ｇ</td>
-          <td id="word188">Ｍ</td>
-          <td id="word189">Ｇ</td>
-          <td id="word190">Ｖ</td>
-          <td id="word191">Ａ</td>
-          <td id="word192">Ｕ</td>
-          <td id="word193">Ｎ</td>
-          <td id="word194">Ａ</td>
-          <td id="word195">Ｏ</td>
-          <td id="word196">Ｗ</td>
-          <td id="word197">Ｈ</td>
-          <td id="word198">Ｈ</td>
-          <td id="word199">Ｆ</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <form>
-    <input type="button" value="問題初期化" onclick="gameSet()"><br>
-    <input type="button" value="記事へ戻る" onclick="location.href='3.html'"><br>
+<!-- ↓ここから見える部分↓ -->
 
-  </form>
+<body>
 
-
+  <center>
+    <h1 id="start" class="text">何かキーを押して下さい</h1>
+  </center>
 
 </body>
+
+<!-- https://janken.asotetu.work/js_tip/ -->
+
 </html>
